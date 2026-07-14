@@ -1,49 +1,62 @@
-# CHARTER — the first AI employee of xyon
+# 委任状 —— xyon 的第一位 AI 员工
 
-This file is the founding experiment of this repository. It is a mandate,
-not a plan: it names one AI agent, one responsibility, one budget, and one
-falsifiable success criterion, then runs for eight weeks.
+*(English summary at the bottom · 英文摘要见文末)*
 
-## Appointment
+这份文件是本仓库的创始实验。它是一份**委任状**，不是计划书：
+指定一个 Agent、一项职责、一笔预算、一条可证伪的验收标准，
+然后运行八周。
 
-- **Employee**: `ci-guardian` — an AI agent built on the Claude Agent SDK.
-- **Employer**: the human owner of this repository.
-- **Start**: the day the first `ci-guardian` evidence bundle is committed.
-- **Term**: 8 weeks. Renewal requires the verdict below.
+## 任命
 
-## Responsibility
+- **员工**：`ci-guardian` —— 基于 Claude Agent SDK 构建的 AI Agent。
+- **雇主**：本仓库的人类所有者。
+- **入职日**：第一份 `ci-guardian` 证据包提交进仓库的那一天。
+- **任期**：八周。续约取决于文末的裁定条款。
 
-Keep the CI of `xyon` healthy.
+## 职责
 
-- CI green: stay silent.
-- CI red: investigate, and either open a fix (every change goes through
-  human approval) or escalate with a diagnosis.
-- Weekly: file one signed work report as an evidence bundle in `reports/`.
+看护 `xyon` 仓库的 CI 健康。
 
-## Authority and limits
+- CI 绿：保持沉默。
+- CI 红：先调查，然后要么提交修复（所有变更必须经人类审批），
+  要么带着诊断结论升级上报。
+- 每周：以证据包形式向 `reports/` 提交一份签名工作报告。
 
-- May: read the repo, run builds and tests, propose commits on branches.
-- May not: push to `main`, touch secrets, spend beyond budget, or act
-  outside this repository.
-- Every tool call is recorded in a xyon ledger; every completed task is
-  sealed with `xyon seal` and verifiable by anyone with `xyon verify`.
+## 权限与边界
 
-## Budget
+- **可以**：读取仓库、运行构建与测试、在分支上提议 commit。
+- **不可以**：推送到 `main`、接触任何 secret、超出预算消费、
+  在本仓库之外采取任何行动。
+- 每次工具调用都记录进 xyon 账本；每个完成的任务都用 `xyon seal`
+  封存，任何人都可用 `xyon verify` 验证。
 
-- API cost: capped per month (set by employer at hire time).
-- Human attention: escalations must include a diagnosis, not a question.
+## 预算
 
-## The falsifiable verdict (week 8)
+- API 成本：按月设上限（雇主在雇佣时设定）。
+- 人类注意力：升级上报必须附带诊断结论，而不是抛出问题。
 
-The experiment succeeds only if the week-8 employee is **measurably more
-competent than the week-1 employee at this specific job**, shown by its
-own signed evidence: faster diagnosis, fewer false escalations, or reports
-that cite lessons learned in earlier weeks.
+## 可证伪的裁定（第八周）
 
-If the memory does not compound, the thesis of this project — that agents
-can accrue verifiable track records worth trusting — fails cheaply, in
-eight weeks, and this file will say so rather than be deleted.
+实验成功的唯一标准：第八周的员工在这项具体工作上**可度量地比
+第一周更胜任**，且由它自己的签名证据证明——诊断更快、误报更少、
+或报告中引用了此前几周学到的教训。
 
-## Status
+如果记忆没有复利，那么本项目的核心论题——Agent 可以积累值得信任的
+可验证履历——就以最低的成本、在八周内被证伪。届时本文件将如实记录
+失败，而不是被删除。
 
-- [ ] Employee not yet hired. Ledger and verifier shipped first (v0.0.1).
+## 状态
+
+- [ ] 员工尚未雇佣。账本与验证器先行交付（v0.0.1）。
+
+---
+
+## English Summary
+
+This is a mandate, not a plan: one AI employee (`ci-guardian`, built on
+the Claude Agent SDK), one responsibility (keep xyon's CI healthy), one
+budget, one falsifiable verdict. The experiment succeeds only if the
+week-8 employee is measurably more competent than the week-1 employee,
+proven by its own signed evidence bundles in `reports/`. If memory does
+not compound, the thesis fails cheaply in eight weeks — and this file
+will record the failure rather than be deleted.

@@ -1,40 +1,41 @@
 # xyon
 
-Signed, tamper-evident evidence for AI agent actions.
+为 AI Agent 的行为提供签名的、防篡改的证据。
 
-xyon is a single small binary that records what an agent did into an
-append-only, hash-chained, ed25519-signed ledger — and seals it into an
-evidence bundle that **anyone can verify offline**, with no account, no
-network, and no trust in the person handing it over.
+*(English summary at the bottom · 英文摘要见文末)*
 
-## Status: v0.0.1 — honest and tiny
+xyon 是一个很小的单一二进制程序：它把 Agent 做过的每件事记录进一份
+**只追加、哈希链接、ed25519 签名**的账本，并封存为一个证据包——
+**任何人都可以离线验证**，不需要账号、不需要联网、也不需要信任递交证据的人。
 
-What exists today (everything below is implemented and tested):
+## 当前状态：v0.0.1 —— 诚实且微小
 
-- `xyon init` — create a local ed25519 identity
-- `xyon record <type> [json]` — append a signed event to the ledger
-- `xyon log` — print the ledger
-- `xyon seal <out.json>` — seal the ledger into a self-contained bundle
-- `xyon verify <bundle.json>` — independently verify chain + signatures
+今天已经存在的（以下每一条都已实现并有测试覆盖）：
 
-What does not exist yet: agent integration (Claude Code hooks), approval
-gates, rollback, the `ci-guardian` employee described in [CHARTER.md](CHARTER.md).
-This README will only ever describe things that are real.
+- `xyon init` —— 创建本地 ed25519 身份
+- `xyon record <type> [json]` —— 向账本追加一条签名事件
+- `xyon log` —— 打印账本内容
+- `xyon seal <out.json>` —— 将账本封存为自包含的证据包
+- `xyon verify <bundle.json>` —— 独立验证哈希链与全部签名
 
-## Install
+尚不存在的：Agent 集成（Claude Code hooks）、审批闸门、回滚、
+[CHARTER.md](CHARTER.md) 中描述的 `ci-guardian` 员工。
+**本 README 永远只描述真实存在的东西。**
 
-There are no prebuilt releases yet. Build from source:
+## 安装
+
+目前没有预构建的发布版本，需要从源码构建：
 
 ```bash
 git clone https://github.com/zaimouren1/xyon
 cd xyon
-cargo build --release   # requires Rust 1.75+
+cargo build --release   # 需要 Rust 1.75+
 ```
 
-## Try it in 60 seconds
+## 60 秒上手
 
 ```bash
-export XYON_HOME=$(mktemp -d)   # keep the demo isolated
+export XYON_HOME=$(mktemp -d)   # 隔离演示环境
 xyon init
 xyon record task_start '{"mission":"demo"}'
 xyon record tool_call  '{"tool":"bash","cmd":"cargo test"}'
@@ -44,28 +45,41 @@ xyon verify evidence.json
 # ✓ signature valid · chain intact
 ```
 
-Now tamper with any byte of any event in `evidence.json` and run
-`xyon verify` again — it fails. Delete an event — it fails. Reorder —
-it fails. That is the entire point.
+现在试着篡改 `evidence.json` 里任何事件的任何一个字节，再运行
+`xyon verify`——验证失败。删掉一条事件——失败。调换顺序——失败。
+**这就是全部意义所在。**
 
-## Why
+## 为什么做这个
 
-Agents are becoming capable faster than they are becoming trustworthy.
-The missing piece is not intelligence — it is *evidence*: a record of what
-an agent actually did that the agent (or its vendor, or its operator)
-cannot quietly rewrite. xyon is the smallest possible version of that
-record, built first, so everything later can stand on it.
+Agent 能力的增长速度远快于它获得信任的速度。缺的那块拼图不是智能，
+而是**证据**：一份 Agent（或它的厂商、它的操作者）无法悄悄改写的
+行为记录。xyon 是这份记录的最小可行形态——先把它造出来，之后的一切
+才有立足之地。
 
-The longer-term thesis lives in [CHARTER.md](CHARTER.md): agents with
-verifiable track records — employees, not tools.
+更长期的论题写在 [CHARTER.md](CHARTER.md)：拥有可验证履历的 Agent
+——是员工，而不是工具。
 
-## Design
+## 设计
 
-- One ledger = one JSONL file. Each line is one event, signed over its
-  canonical bytes, carrying the hash of the previous event.
-- A bundle = the ledger + a seal signature over the chain head.
-- The verifier needs only the bundle. Key material never leaves `$XYON_HOME`.
+- 一份账本 = 一个 JSONL 文件。每行一条事件，签名覆盖其规范化字节，
+  并携带前一条事件的哈希。
+- 一个证据包 = 账本全文 + 对链头的封存签名。
+- 验证器只需要证据包本身。私钥永远不离开 `$XYON_HOME`。
 
-## License
+## 许可证
 
 Apache-2.0
+
+---
+
+## English Summary
+
+xyon is a single small binary that records what an AI agent did into an
+append-only, hash-chained, ed25519-signed ledger, and seals it into an
+evidence bundle that anyone can verify offline — no account, no network,
+no trust in the person handing it over.
+
+v0.0.1 ships five commands (`init`, `record`, `log`, `seal`, `verify`),
+all implemented and tested. Agent integration, approval gates, and the
+`ci-guardian` experiment described in [CHARTER.md](CHARTER.md) do not
+exist yet. This README only ever describes what is real.
