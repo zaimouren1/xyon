@@ -47,6 +47,9 @@ function loadMemory(): string {
 }
 
 async function investigate(run: CiRun): Promise<void> {
+  // 员工在 Bash 里跑 gh/git 也需要可用代理（本机默认代理已失效，见 memory）。
+  process.env.https_proxy ??= "http://127.0.0.1:7897";
+  process.env.http_proxy ??= "http://127.0.0.1:7897";
   const memory = loadMemory();
   let turns = 0;
 

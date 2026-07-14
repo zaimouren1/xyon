@@ -113,7 +113,8 @@ impl Ledger {
     ) -> Result<Event, LedgerError> {
         let (seq, prev) = match self.tail()? {
             None => (0, GENESIS_HASH.to_string()),
-            Some(prev_event) => (prev_event.seq + 1, prev_event.hash()),
+            // 复用尾事件已存储的链哈希，避免整链重算
+            Some(prev_event) => (prev_event.seq + 1, prev_event.prev.clone()),
         };
         let mut event = Event {
             schema: EVENT_SCHEMA.to_string(),
