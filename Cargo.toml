@@ -1,0 +1,23 @@
+[package]
+name = "xyon"
+version = "0.0.1"
+edition = "2021"
+license = "Apache-2.0"
+description = "Signed, tamper-evident evidence for AI agent actions: record, seal, verify."
+repository = "https://github.com/zaimouren1/xyon"
+
+[dependencies]
+anyhow = "1"
+bs58 = "0.5"
+chrono = "0.4"
+clap = { version = "4", features = ["derive"] }
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+hex = "0.4"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"
+
+[dev-dependencies]
+tempfile = "3"
