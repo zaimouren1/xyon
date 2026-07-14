@@ -47,7 +47,12 @@
 
 ## 状态
 
-- [ ] 员工尚未雇佣。账本与验证器先行交付（v0.0.1）。
+- [x] 员工已于 2026-07-15 雇佣。
+  - 身份（principal）：`DtsE96dhbXH1hUbpGRjcWt8jKerDwooSSJ37PT7Up4mS`
+  - 公钥：`baf03b57ea99473c91004c239669beffe903ec45cc8c256c5732fdf0f3f2d434`
+  - 预算：每次唤醒 ≤ 20 轮工具调用；唤醒方式：手动/本地定时（`bun run guard`）
+  - 首份证据包：[`reports/hired-2026-07-15.json`](reports/hired-2026-07-15.json)
+  - 八周任期起算日：2026-07-15；裁定日：2026-09-09
 
 ---
 
